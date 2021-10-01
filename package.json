@@ -1,0 +1,19 @@
+{
+  "name": "image-resizer",
+  "version": "1.0.0",
+  "main": "image-resizer.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "async": "^3.2.0",
+    "aws-sdk": "^2.775.0",
+    "gm": "^1.23.1",
+    "sharp": "^0.26.2",
+    "util": "^0.12.3"
+  },
+  "devDependencies": {}
+}
