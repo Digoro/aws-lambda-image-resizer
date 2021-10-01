@@ -19,7 +19,10 @@ exports.handler = async (event, context, callback) => {
         await Promise.all(
             transforms.map(async item => {
                 if (extension !== 'gif') {
-                    image.Body = await sharp(image.Body).resize(option).toBuffer();
+                    image.Body = await sharp(image.Body)
+                        .rotate()
+                        .resize(option)
+                        .toBuffer();
                 }
                 return await s3.putObject({
                     Bucket,
