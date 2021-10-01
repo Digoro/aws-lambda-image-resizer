@@ -10,12 +10,7 @@ const transforms = [
 exports.handler = async (event, context, callback) => {
     try {
         console.log(event);
-        // event: {
-        //      key: 'meeting/test.png',
-        //      folder: 'meeting-resized',
-        //      fit: 'fill' or 'cover' //fill: 비율무시 가로세로 값으로 고정, cover: 비율 유지
-        // }
-        const { key, folder, fit } = event;
+        const { key, folder, option } = event;
         const sanitizedKey = key.replace(/\+/g, " ");
         const parts = sanitizedKey.split("/");
         const filename = parts[parts.length - 1];
@@ -24,8 +19,6 @@ exports.handler = async (event, context, callback) => {
         await Promise.all(
             transforms.map(async item => {
                 if (extension !== 'gif') {
-                    const option = { width: item.width, fit }
-                    if (fit === 'fill') option.height = 600;
                     image.Body = await sharp(image.Body).resize(option).toBuffer();
                 }
                 return await s3.putObject({
