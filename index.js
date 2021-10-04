@@ -18,10 +18,10 @@ exports.handler = async (event, context, callback) => {
         const image = await s3.getObject({ Bucket, Key: key }).promise();
         await Promise.all(
             transforms.map(async item => {
-                if (extension !== 'gif') {
+                if (extension !== 'gif' || (extension === 'gif' || option.gif)) {
                     image.Body = await sharp(image.Body)
                         .rotate()
-                        .resize(option)
+                        .resize(option.options)
                         .toBuffer();
                 }
                 return await s3.putObject({
