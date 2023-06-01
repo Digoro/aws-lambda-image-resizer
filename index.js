@@ -19,7 +19,7 @@ exports.handler = async (event, context, callback) => {
         await Promise.all(
             transforms.map(async item => {
                 if (extension !== 'gif' || (extension === 'gif' || option.gif)) {
-                    image.Body = await sharp(image.Body)
+                    image.Body = await sharp(image.Body, { failOnError: false })
                         .rotate()
                         .resize(option.options)
                         .toBuffer();
